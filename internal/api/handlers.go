@@ -31,7 +31,7 @@ func SetupRoutes(router *gin.Engine, linkService *services.LinkService, cfg conf
 	// UPDATED : Route de Health Check , /health
 	router.GET("health", HealthCheckHandler)
 
-	// TODO : Routes de l'API
+	// UPDATED : Routes de l'API
 	// Doivent être au format /api/v1/
 	// POST /links
 	router.POST("/api/v1/links", CreateShortLinkHandler(linkService, cfg))
