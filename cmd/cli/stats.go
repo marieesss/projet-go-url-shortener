@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"errors" // ajout de l'import
 	"fmt"
 	"log"
 	"os"
