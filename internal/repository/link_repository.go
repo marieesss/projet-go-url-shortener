@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// TODO LinkRepository est une interface qui définit les méthodes d'accès aux données
+// UPDATED LinkRepository est une interface qui définit les méthodes d'accès aux données
 // pour les opérations CRUD sur les liens.
 // L'implémenter avec les méthodes nécessaires
 
@@ -18,7 +18,7 @@ type LinkRepository interface {
 	CountClicksByLinkID(linkID uint) (int, error)
 }
 
-// TODO :  GormLinkRepository est l'implémentation de LinkRepository utilisant GORM.
+// UPDATED :  GormLinkRepository est l'implémentation de LinkRepository utilisant GORM.
 type GormLinkRepository struct {
 	db *gorm.DB
 }

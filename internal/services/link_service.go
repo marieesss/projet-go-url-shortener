@@ -15,7 +15,7 @@ import (
 // Définition du jeu de caractères pour la génération des codes courts.
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-// TODO Créer la struct
+// UPDATED Créer la struct
 // LinkService est une structure qui g fournit des méthodes pour la logique métier des liens.
 // Elle détient linkRepo qui est une référence vers une interface LinkRepository.
 // IMPORTANT : Le champ doit être du type de l'interface (non-pointeur).
@@ -32,7 +32,7 @@ func NewLinkService(linkRepo repository.LinkRepository) *LinkService {
 	}
 }
 
-// TODO Créer la méthode GenerateShortCode
+// UPDATED Créer la méthode GenerateShortCode
 // GenerateShortCode est une méthode rattachée à LinkService
 // Elle génère un code court aléatoire d'une longueur spécifiée. Elle prend une longueur en paramètre et retourne une string et une erreur
 // Il utilise le package 'crypto/rand' pour éviter la prévisibilité.

@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// TODO ClickRepository est une interface qui définit les méthodes d'accès aux données
+// UPDATED ClickRepository est une interface qui définit les méthodes d'accès aux données
 // pour les opérations sur les clics. Cette abstraction permet à la couche service
 // de rester indépendante de l'implémentation spécifique de la base de données.
 // Implémenter l'interface avec les méthodes nécessaires.

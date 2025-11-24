@@ -36,14 +36,14 @@ puis lance le serveur HTTP.`,
 			log.Fatal("Error : configuration is nil")
 		}
 
-		// TODO : Initialiser la connexion à la bBDD
+		// UPDATED : Initialiser la connexion à la bBDD
 
 		db, err := gorm.Open(sqlite.Open(cfg.Database.Path), &gorm.Config{})
 		if err != nil {
 			log.Fatalf("Error database: %v", err)
 		}
 
-		// TODO : Initialiser les repositories.
+		// UPDATED : Initialiser les repositories.
 		// Créez des instances de GormLinkRepository et GormClickRepository.
 
 		clickRepo := repository.NewClickRepository(db)
@@ -52,7 +52,7 @@ puis lance le serveur HTTP.`,
 		// Laissez le log
 		log.Println("Repositories initialisés.")
 
-		// TODO : Initialiser les services métiers.
+		// UPDATED : Initialiser les services métiers.
 		// Créez des instances de LinkService et ClickService, en leur passant les repositories nécessaires.
 
 		clickService := services.NewClickService(clickRepo)
@@ -60,12 +60,12 @@ puis lance le serveur HTTP.`,
 		// Laissez le log
 		log.Println("Services métiers initialisés.")
 
-		// TODO : Initialiser le channel ClickEventsChannel (api/handlers) des événements de clic et lancer les workers (StartClickWorkers).
+		// UPDATED : Initialiser le channel ClickEventsChannel (api/handlers) des événements de clic et lancer les workers (StartClickWorkers).
 		// Le channel est bufferisé avec la taille configurée.
 		// Passez le channel et le clickRepo aux workers.
 		clickEventsChan := make(chan models.ClickEvent, cfg.Workers.ClickChannelBufferSize)
 
-		// TODO : Remplacer les XXX par les bonnes variables
+		// UPDATED : Remplacer les XXX par les bonnes variables
 		log.Printf("Channel d'événements de clic initialisé avec un buffer de %d. %d worker(s) de clics démarré(s).",
 			cfg.Workers.ClickChannelBufferSize, cfg.Workers.ClickWorkerCount)
 		// TODO : Initialiser et lancer le moniteur d'URLs.

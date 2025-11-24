@@ -7,7 +7,7 @@ import (
 	"github.com/axellelanca/urlshortener/internal/repository" // Importe le package repository
 )
 
-// TODO : créer la struct
+// UPDATED : créer la struct
 // ClickService est une structure qui fournit des méthodes pour la logique métier des clics.
 // Elle est juste composer de clickRepo qui est de type ClickRepository
 type ClickService struct {
@@ -25,7 +25,7 @@ func NewClickService(clickRepo repository.ClickRepository) *ClickService {
 // RecordClick enregistre un nouvel événement de clic dans la base de données.
 // Cette méthode est appelée par le worker asynchrone.
 func (s *ClickService) RecordClick(click *models.Click) error {
-	// TODO 1: Appeler le ClickRepository (CreateClick) pour créer l'enregistrement de clic.
+	// UPDATED 1: Appeler le ClickRepository (CreateClick) pour créer l'enregistrement de clic.
 	// Gérer toute erreur provenant du repository.
 
 	err := s.clickRepo.CreateClick(click)
