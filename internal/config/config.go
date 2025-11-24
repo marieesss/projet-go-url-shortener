@@ -16,6 +16,7 @@ type Config struct {
 	} `mapstructure:"server"`
 	Database struct {
 		Name string `mapstructure:"name"`
+		Path string `mapstructure:"path"`
 	} `mapstructure:"database"`
 	Analytics struct {
 		BufferSize  int `mapstructure:"buffer_size"`
