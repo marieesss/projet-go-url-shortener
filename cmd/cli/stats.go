@@ -39,7 +39,7 @@ Exemple:
 		// UPDATED : Charger la configuration chargée globalement via cmd.cfg
 		cfg := cmd2.Cfg 
 
-		// TODO 3: Initialiser la connexion à la BDD.
+		// UPDATED 3: Initialiser la connexion à la BDD.
 		// log.Fatalf si erreur
 		db, err := gorm.Open(sqlite.Open(cfg.Database.DSN), &gorm.Config{})
 		if err != nil {
