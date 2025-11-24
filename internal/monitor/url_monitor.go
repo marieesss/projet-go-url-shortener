@@ -59,7 +59,7 @@ func (m *UrlMonitor) checkUrls() {
 
 	for _, link := range links {
 
-		// TODO : Pour chaque lien, vérifier son accessibilité (isUrlAccessible).
+		// UPDATED : Pour chaque lien, vérifier son accessibilité (isUrlAccessible).
 		currentState := m.isUrlAccessible(link.LongURL)
 
 		// Protéger l'accès à la map 'knownStates' car 'checkUrls' peut être exécuté concurremment
