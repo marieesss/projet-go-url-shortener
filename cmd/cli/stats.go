@@ -41,7 +41,7 @@ Exemple:
 
 		// UPDATED 3: Initialiser la connexion à la BDD.
 		// log.Fatalf si erreur
-		db, err := gorm.Open(sqlite.Open(cfg.Database.DSN), &gorm.Config{})
+		db, err := gorm.Open(sqlite.Open(cfg.Database.Name), &gorm.Config{})
 		if err != nil {
 			log.Fatalf("FATAL: échec de la connexion à la base de données SQLite: %v", err)
 		}
@@ -51,13 +51,6 @@ Exemple:
 			log.Fatalf("FATAL: Échec de l'obtention de la base de données SQL sous-jacente: %v", err)
 		}
 
-
-		sqlDB, err := db.DB()
-		if err != nil {
-			log.Fatalf("FATAL: Échec de l'obtention de la base de données SQL sous-jacente: %v", err)
-		}
-
-
 		// UPDATED S'assurer que la connexion est fermée à la fin de l'exécution de la commande grâce à defer
     	defer sqlDB.Close()
 
@@ -65,7 +58,7 @@ Exemple:
 		// linkRepo :=
 		// linkService :=
 		linkRepo := repository.NewLinkRepository(db)
-    	linkService := services.NewLinkService(linkRepo)
+    	linkService := services.NewLinkService(linkRepo, clickRepo)
 
 		// UPDATED 5: Appeler GetLinkStats pour récupérer le lien et ses statistiques.
 		// Attention, la fonction retourne 3 valeurs
@@ -92,22 +85,18 @@ Exemple:
 // Il est utilisé pour définir les flags que cette commande accepte.
 func init() {
 	// UPDATED : Définir le flag --code pour la commande stats.
-    link, totalClicks, err := linkService.GetLinkStats(shortCodeFlag)
-    if err != nil {
-        // On utilise gorm.ErrRecordNotFound pour distinguer le "pas trouvé"
-        if errors.Is(err, gorm.ErrRecordNotFound) {
-            fmt.Fprintf(os.Stderr, "Aucun lien trouvé pour le code court %q\n", shortCodeFlag)
-        } else {
-            fmt.Fprintf(os.Stderr, "Erreur lors de la récupération des statistiques pour %q : %v\n", shortCodeFlag, err)
-        }
-        os.Exit(1)
-    }
+	StatsCmd.Flags().StringVar(
+		&shortCodeFlag,
+		"code",
+		"",
+		"Code du lien court pour lequel afficher les statistiques",
+	)
 
 	// UPDATED Marquer le flag comme requis
-    if err := StatsCmd.MarkFlagRequired("code"); err != nil {
-        log.Fatalf("FATAL: impossible de marquer le flag --code comme requis: %v", err)
-    }
+	if err := StatsCmd.MarkFlagRequired("code"); err != nil {
+		log.Fatalf("FATAL: impossible de marquer le flag --code comme requis: %v", err)
+	}
 
 	// UPDATED : Ajouter la commande à RootCmd
-    cmd2.RootCmd.AddCommand(StatsCmd)
+	cmd2.RootCmd.AddCommand(StatsCmd)
 }
