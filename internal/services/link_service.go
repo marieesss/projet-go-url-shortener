@@ -1,9 +1,11 @@
 package services
 
 import (
+	"crypto/rand"
 	"errors"
 	"fmt"
 	"log"
+	"math/big"
 	"time"
 
 	"gorm.io/gorm" // Nécessaire pour la gestion spécifique de gorm.ErrRecordNotFound
@@ -26,9 +28,10 @@ type LinkService struct {
 }
 
 // NewLinkService crée et retourne une nouvelle instance de LinkService.
-func NewLinkService(linkRepo repository.LinkRepository) *LinkService {
+func NewLinkService(linkRepo repository.LinkRepository, clickRepo repository.ClickRepository) *LinkService {
 	return &LinkService{
-		linkRepo: linkRepo,
+		linkRepo:  linkRepo,
+		clickRepo: clickRepo,
 	}
 }
 
@@ -37,6 +40,24 @@ func NewLinkService(linkRepo repository.LinkRepository) *LinkService {
 // Elle génère un code court aléatoire d'une longueur spécifiée. Elle prend une longueur en paramètre et retourne une string et une erreur
 // Il utilise le package 'crypto/rand' pour éviter la prévisibilité.
 // Je vous laisse chercher un peu :) C'est faisable en une petite dizaine de ligne
+
+func (s *LinkService) GenerateShortCode(length int) (string, error) {
+	if length <= 0 {
+		return "", errors.New("invalid length")
+	}
+
+	code := make([]byte, length)
+
+	for i := 0; i < length; i++ {
+		r, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
+		if err != nil {
+			return "", fmt.Errorf("failed to generate random char: %w", err)
+		}
+		code[i] = charset[r.Int64()]
+	}
+
+	return string(code), nil
+}
 
 // CreateLink crée un nouveau lien raccourci.
 // Il génère un code court unique, puis persiste le lien dans la base de données.
