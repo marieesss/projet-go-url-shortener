@@ -25,6 +25,10 @@ type LinkService struct {
 	clickRepo repository.ClickRepository
 }
 
+func (s *LinkService) GetStats(shortCode string) (link *models.Link, totalClicks int, error error) {
+	panic("unimplemented")
+}
+
 // NewLinkService crée et retourne une nouvelle instance de LinkService.
 func NewLinkService(linkRepo repository.LinkRepository) *LinkService {
 	return &LinkService{
