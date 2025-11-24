@@ -42,7 +42,7 @@ basées sur les modèles Go.`,
 
 		defer sqlDB.Close()
 
-		// TODO 3: Exécuter les migrations automatiques de GORM.
+		// UPDATED 3: Exécuter les migrations automatiques de GORM.
 		// Utilisez db.AutoMigrate() et passez-lui les pointeurs vers tous vos modèles.
 
 		err = db.AutoMigrate(
