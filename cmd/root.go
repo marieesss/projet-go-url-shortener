@@ -11,7 +11,7 @@ import (
 // Elle sera accessible à toutes les commandes Cobra.
 var Cfg *config.Config
 
-// TODO : Créer la RootCmd avec Cobra
+// UPDATE : Créer la RootCmd avec Cobra
 // Utiliser ces descriptions :
 // "Un service de raccourcissement d'URLs avec API REST et CLI"
 // `
@@ -46,7 +46,7 @@ func Execute() {
 // avant la fonction main(). Elle est utilisée ici pour initialiser Cobra
 // et ajouter toutes les sous-commandes.
 func init() {
-	// TODO Initialiser la configuration globale avec OnInitialize
+	// UPDATE Initialiser la configuration globale avec OnInitialize
 
 	cobra.OnInitialize(initConfig)
 

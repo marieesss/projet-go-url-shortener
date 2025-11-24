@@ -81,7 +81,7 @@ func CreateShortLinkHandler(linkService *services.LinkService, cfg config.Config
 		c.JSON(http.StatusCreated, gin.H{
 			"short_code":     link.ShortCode,
 			"long_url":       link.LongURL,
-			"full_short_url": cfg.Server.BaseURL + link.ShortCode, // TODO: Utiliser cfg.Server.BaseURL ici
+			"full_short_url": cfg.Server.BaseURL + link.ShortCode, // UPDATED: Utiliser cfg.Server.BaseURL ici
 		})
 	}
 }
