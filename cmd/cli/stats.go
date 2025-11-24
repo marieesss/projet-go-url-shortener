@@ -37,7 +37,7 @@ Exemple:
 		}
 
 		// UPDATED : Charger la configuration chargée globalement via cmd.cfg
-		cfg := cmd2.Cfg 
+		cfg := cmd2.Cfg
 
 		// UPDATED 3: Initialiser la connexion à la BDD.
 		// log.Fatalf si erreur
@@ -52,13 +52,14 @@ Exemple:
 		}
 
 		// UPDATED S'assurer que la connexion est fermée à la fin de l'exécution de la commande grâce à defer
-    	defer sqlDB.Close()
+		defer sqlDB.Close()
 
 		// UPDATED : Initialiser les repositories et services nécessaires NewLinkRepository & NewLinkService
 		// linkRepo :=
 		// linkService :=
 		linkRepo := repository.NewLinkRepository(db)
-    	linkService := services.NewLinkService(linkRepo, clickRepo)
+		clickRepo := repository.NewClickRepository(db)
+		linkService := services.NewLinkService(linkRepo, clickRepo)
 
 		// UPDATED 5: Appeler GetLinkStats pour récupérer le lien et ses statistiques.
 		// Attention, la fonction retourne 3 valeurs
