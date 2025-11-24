@@ -3,15 +3,11 @@ package cli
 import (
 	"fmt"
 	"log"
-	"net/url" // Pour valider le format de l'URL
-	"os"
 
+	// Pour valider le format de l'URL
 	cmd2 "github.com/axellelanca/urlshortener/cmd"
-	"github.com/axellelanca/urlshortener/internal/repository"
-	"github.com/axellelanca/urlshortener/internal/services"
 	"github.com/spf13/cobra"
-	"gorm.io/driver/sqlite" // Driver SQLite pour GORM
-	"gorm.io/gorm"
+	// Driver SQLite pour GORM
 )
 
 // TODO : Faire une variable longURLFlag qui stockera la valeur du flag --url
@@ -30,7 +26,11 @@ Exemple:
 		// TODO Validation basique du format de l'URL avec le package url et la fonction ParseRequestURI
 		// si erreur, os.Exit(1)
 
-		// TODO : Charger la configuration chargée globalement via cmd.cfg
+		// UPDATED : Charger la configuration chargée globalement via cmd.cfg
+		cfg := cmd2.Cfg
+		if cfg == nil {
+			log.Fatal("Error : configuration is nil")
+		}
 
 		// TODO : Initialiser la connexion à la base de données SQLite.
 
@@ -40,7 +40,7 @@ Exemple:
 		}
 
 		// TODO S'assurer que la connexion est fermée à la fin de l'exécution de la commande
-		
+
 		// TODO : Initialiser les repositories et services nécessaires NewLinkRepository & NewLinkService
 
 		// TODO : Appeler le LinkService et la fonction CreateLink pour créer le lien court.

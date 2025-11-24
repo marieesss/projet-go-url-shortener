@@ -20,7 +20,7 @@ var ClickEventsChannel chan models.ClickEvent
 // aux workers asynchrones. Il est bufferisé pour ne pas bloquer les requêtes de redirection.
 
 // SetupRoutes configure toutes les routes de l'API Gin et injecte les dépendances nécessaires
-func SetupRoutes(router *gin.Engine, linkService *services.LinkService, cfg config.Config) {
+func SetupRoutes(router *gin.Engine, linkService *services.LinkService, cfg *config.Config) {
 	// Le channel est initialisé ici.
 	if ClickEventsChannel == nil {
 		// UPDATED Créer le channel ici (make), il doit être bufférisé
@@ -34,7 +34,7 @@ func SetupRoutes(router *gin.Engine, linkService *services.LinkService, cfg conf
 	// UPDATED : Routes de l'API
 	// Doivent être au format /api/v1/
 	// POST /links
-	router.POST("/api/v1/links", CreateShortLinkHandler(linkService, cfg))
+	router.POST("/api/v1/links", CreateShortLinkHandler(linkService, *cfg))
 	// GET /links/:shortCode/stats
 	router.GET("/api/v1/links/:shortCode/stats", GetLinkStatsHandler(linkService))
 
